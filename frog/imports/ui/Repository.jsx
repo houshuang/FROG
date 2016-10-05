@@ -8,11 +8,9 @@ export default class Repository extends Component {
   constructor(props) {
     super(props);
 
-		this.state = {
-
+    this.state = {
       plane: [],
       type: [],
-
     }
 	}
 
@@ -52,12 +50,12 @@ export default class Repository extends Component {
   createFilterBoxPlane(value) {
     return (
       <span>
-      <input
-        type="checkbox"
-        readOnly
-        checked={this.state.plane.indexOf(value) == -1}
-        onClick={this.toggleFilterPlane.bind(this, value)}
-      /> {value} <br/>
+        <input
+          type="checkbox"
+          readOnly
+          checked={this.state.plane.indexOf(value) == -1}
+          onClick={this.toggleFilterPlane.bind(this, value)}
+        /> {value} <br/>
       </span>
     );
   }
@@ -65,12 +63,12 @@ export default class Repository extends Component {
   createFilterBoxType(value) {
     return (
       <span>
-      <input
-        type="checkbox"
-        readOnly
-        checked={this.state.type.indexOf(value) == -1}
-        onClick={this.toggleFilterType.bind(this, value)}
-      /> {value} <br/>
+        <input
+          type="checkbox"
+          readOnly
+          checked={this.state.type.indexOf(value) == -1}
+          onClick={this.toggleFilterType.bind(this, value)}
+        /> {value} <br/>
       </span>
     );
   }
@@ -111,12 +109,12 @@ export default class Repository extends Component {
         <label className="filters">
             Show only plane(s):
             <div className="plane-checkbox">
-  						  {this.createFilterBoxPlane(1)}
-                {this.createFilterBoxPlane(2)}
-                {this.createFilterBoxPlane(3)}
+              {this.createFilterBoxPlane(1)}
+              {this.createFilterBoxPlane(2)}
+              {this.createFilterBoxPlane(3)}
             </div>
 
-            Show only the following type(s) of lectures
+            Show only the following type(s) of activities:
             <div className="type-checkbox">
               {this.createFilterBoxType("Lecture")}
               {this.createFilterBoxType("Quizz")}
