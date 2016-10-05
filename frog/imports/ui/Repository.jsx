@@ -6,7 +6,7 @@ import { Activities } from '../api/activities.js';
 export default class Repository extends Component {
 
   constructor(props) {
-		super(props);
+    super(props);
 
 		this.state = {
 
@@ -49,6 +49,32 @@ export default class Repository extends Component {
     });
   }
 
+  createFilterBoxPlane(value) {
+    return (
+      <span>
+      <input
+        type="checkbox"
+        readOnly
+        checked={this.state.plane.indexOf(value) == -1}
+        onClick={this.toggleFilterPlane.bind(this, value)}
+      /> {value} <br/>
+      </span>
+    );
+  }
+
+  createFilterBoxType(value) {
+    return (
+      <span>
+      <input
+        type="checkbox"
+        readOnly
+        checked={this.state.type.indexOf(value) == -1}
+        onClick={this.toggleFilterType.bind(this, value)}
+      /> {value} <br/>
+      </span>
+    );
+  }
+
   renderActivities() {
     let filteredActivities = this.props.activities;
 
@@ -60,7 +86,7 @@ export default class Repository extends Component {
 
     this.state.type.map((value) => (
       filteredActivities = filteredActivities.filter(activity =>
-        activity.type != value)
+        activity.type != value.toLowerCase())
     ));
 
     return (
@@ -82,53 +108,19 @@ export default class Repository extends Component {
     return(
       <div >
         <h1>Activities</h1>
-        <label className="filter-plane">
+        <label className="filters">
             Show only plane(s):
             <div className="plane-checkbox">
-  						<input
-  							type="checkbox"
-  							readOnly
-  							checked={this.state.plane.indexOf(1) == -1}
-  							onClick={this.toggleFilterPlane.bind(this, 1)}
-  						/>1<br/>
-
-              <input
-  							type="checkbox"
-  							readOnly
-                checked={this.state.plane.indexOf(2) == -1}
-                onClick={this.toggleFilterPlane.bind(this, 2)}
-  						/>2<br />
-
-              <input
-  							type="checkbox"
-  							readOnly
-                checked={this.state.plane.indexOf(3) == -1}
-                onClick={this.toggleFilterPlane.bind(this, 3)}
-  						/>3<br/>
+  						  {this.createFilterBoxPlane(1)}
+                {this.createFilterBoxPlane(2)}
+                {this.createFilterBoxPlane(3)}
             </div>
 
-            Show only the following type(s) of lectures:
+            Show only the following type(s) of lectures
             <div className="type-checkbox">
-  						<input
-  							type="checkbox"
-  							readOnly
-  							checked={this.state.type.indexOf("lecture") == -1}
-  							onClick={this.toggleFilterType.bind(this, "lecture")}
-  						/>Lecture<br/>
-
-              <input
-  							type="checkbox"
-  							readOnly
-                checked={this.state.type.indexOf("quizz") == -1}
-                onClick={this.toggleFilterType.bind(this, "quizz")}
-  						/>Quizz<br />
-
-              <input
-  							type="checkbox"
-  							readOnly
-                checked={this.state.type.indexOf("video") == -1}
-                onClick={this.toggleFilterType.bind(this, "video")}
-  						/>Video<br/>
+              {this.createFilterBoxType("Lecture")}
+              {this.createFilterBoxType("Quizz")}
+              {this.createFilterBoxType("Video")}
             </div>
         </label>
         <ul>
